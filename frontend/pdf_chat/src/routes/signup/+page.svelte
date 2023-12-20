@@ -1,3 +1,7 @@
+<script lang="ts">
+  import TextInput from "$lib/inputs/+textInput.svelte";
+</script>
+
 <!-- Hero -->
 <div class="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-blue-950 dark:via-transparent">
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -56,22 +60,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="text" id="hs-floating-underline-input-passowrd" class="peer py-4 px-0 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 text-sm placeholder:text-transparent focus:border-0 focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 dark:focus:border-b-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="********">
-                        <label for="hs-floating-underline-input-passowrd" class="absolute top-0 start-0 py-4 px-0 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">First name</label>
-                      </div>
+                      <TextInput type="text" placeholder="First name" required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -79,22 +68,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="text" id="hs-hero-signup-form-floating-input-last-name" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="Doe">
-                        <label for="hs-hero-signup-form-floating-input-last-name" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">Last name</label>
-                      </div>
+                      <TextInput type="text" placeholder="Last name" required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -102,22 +76,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="email" id="hs-hero-signup-form-floating-input-email" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="you@email.com">
-                        <label for="hs-hero-signup-form-floating-input-email" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">Email</label>
-                      </div>
+                      <TextInput type="email" placeholder="Email" required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -125,22 +84,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="text" id="hs-hero-signup-form-floating-input-company-name" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="Preline">
-                        <label for="hs-hero-signup-form-floating-input-company-name" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">Company name</label>
-                      </div>
+                      <TextInput type="text" placeholder="Username" required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -148,80 +92,15 @@
                     <!-- Input Group -->
                     <div class="relative col-span-full">
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="password" id="hs-hero-signup-form-floating-input-new-password" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="********">
-                        <label for="hs-hero-signup-form-floating-input-new-password" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">New password</label>
-                      </div>
-                      <!-- End Floating Input -->
-  
-                      <div id="hs-strong-password-popover" class="hidden absolute z-10 w-full bg-blue-50 rounded-lg p-4 dark:bg-blue-950">
-                        <div id="hs-strong-password-in-popover" class="flex mt-2 -mx-1">
+                      <!-- <TextInput type="password" placeholder="Password" required={true}/> -->
+                      <!-- Strong Password -->
+                      <div class="max-w-sm">
+                        <div class="flex">
+                          <TextInput  type="password" placeholder="Password" required={true}/>
                         </div>
-  
-                        <h4 class="mt-3 text-sm font-semibold text-gray-800 dark:text-white">
-                          Your password must contain:
-                        </h4>
-  
-                        <ul class="space-y-1 text-sm text-gray-500">
-                          <li data-hs-strong-password-hints-rule-text="min-length" class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                            <span class="hidden" data-check>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
-                            <span data-uncheck>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </span>
-                            Minimum number of characters is 6.
-                          </li>
-                          <li data-hs-strong-password-hints-rule-text="lowercase" class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                            <span class="hidden" data-check>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
-                            <span data-uncheck>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </span>
-                            Should contain lowercase.
-                          </li>
-                          <li data-hs-strong-password-hints-rule-text="uppercase" class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                            <span class="hidden" data-check>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
-                            <span data-uncheck>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </span>
-                            Should contain uppercase.
-                          </li>
-                          <li data-hs-strong-password-hints-rule-text="numbers" class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                            <span class="hidden" data-check>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
-                            <span data-uncheck>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </span>
-                            Should contain numbers.
-                          </li>
-                          <li data-hs-strong-password-hints-rule-text="special-characters" class="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
-                            <span class="hidden" data-check>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </span>
-                            <span data-uncheck>
-                              <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                            </span>
-                            Should contain special characters.
-                          </li>
-                        </ul>
                       </div>
+                      <!-- End Strong Password -->
+                      <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
   
