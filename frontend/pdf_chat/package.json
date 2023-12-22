@@ -15,6 +15,7 @@
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/animejs": "^3.1.12",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.16",
@@ -33,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"animejs": "^3.2.2",
 		"preline": "^2.0.2"
 	}
 }

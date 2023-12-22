@@ -1,9 +1,17 @@
 <script lang="ts">
   import TextInput from "$lib/inputs/+textInput.svelte";
+  import SelectInput from "$lib/inputs/+selectInput.svelte";
+  import ThemeToggle from "$lib/components/themeToggle.svelte";
+
+
 </script>
 
 <!-- Hero -->
-<div class="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-blue-950 dark:via-transparent">
+
+<div class="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-slate-900 dark:bg-slate-950">
+  <div class="absolute top-10 left-10 w-auto h-auto">
+    <ThemeToggle/>
+  </div>
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <!-- Grid -->
       <div class="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
@@ -88,18 +96,22 @@
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
+
+                    <!-- Input Group -->
+                    <div class="relative col-span-full grid grid-cols-2 gap-4">
+                      <div>
+                        <SelectInput label="Gender" options={["Male", "Female"]}/>
+                      </div>
+                      <div>
+                        <SelectInput label="Grade" options="{[...Array(12).keys()].map(n => `Grade ${n+1}`)}"/>
+                      </div>
+                    </div>
   
                     <!-- Input Group -->
                     <div class="relative col-span-full">
                       <!-- Floating Input -->
-                      <!-- <TextInput type="password" placeholder="Password" required={true}/> -->
-                      <!-- Strong Password -->
-                      <div class="max-w-sm">
-                        <div class="flex">
-                          <TextInput  type="password" placeholder="Password" required={true}/>
-                        </div>
-                      </div>
-                      <!-- End Strong Password -->
+                    <TextInput  type="password" placeholder="Password" required={true}/>
+
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -107,22 +119,7 @@
                     <!-- Input Group -->
                     <div class="col-span-full">
                       <!-- Floating Input -->
-                      <div class="relative">
-                        <input type="password" id="hs-hero-signup-form-floating-input-current-password" class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                        focus:pt-6
-                        focus:pb-2
-                        [&:not(:placeholder-shown)]:pt-6
-                        [&:not(:placeholder-shown)]:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="********">
-                        <label for="hs-hero-signup-form-floating-input-current-password" class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                          peer-focus:text-xs
-                          peer-focus:-translate-y-1.5
-                          peer-focus:text-gray-500
-                          peer-[:not(:placeholder-shown)]:text-xs
-                          peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                          peer-[:not(:placeholder-shown)]:text-gray-500">Current password</label>
-                      </div>
+                      <TextInput  type="password" placeholder="Repeat password" required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -132,7 +129,7 @@
                   <!-- Checkbox -->
                   <div class="mt-5 flex items-center">
                     <div class="flex">
-                      <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                      <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                     </div>
                     <div class="ms-3">
                       <label for="remember-me" class="text-sm dark:text-white">I accept the <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms and Conditions</a></label>
