@@ -1,47 +1,73 @@
 <script lang="ts">
-    // import anime from 'animejs'
+    import anime from 'animejs'
+    import { browser } from "$app/environment";
+    import { slide } from 'svelte/transition';
 
+    export let currentTab : string | null = browser ? localStorage.getItem("currentTab") : null
+    
     const firstText = "Chat"
     const secondText = "Forum"
-
-    // const chatTab = document.querySelector("#tab-switch-wrapper button:nth-child(1)")
-    // const forumTab = document.querySelector("#tab-switch-wrapper button:nth-child(2)")
-    // const toggle = document.querySelector("#tab-switch-wrapper button:nth-child(3)")
     
-    // const toggleTab = () => {
-    //     let current = toggle?.textContent
+    
+    const toggleTab = () => {
+        let currentTabSpan = document.querySelector("#current-tab")
+        let currentTabSpanWidth = currentTabSpan?.computedStyleMap().get("width")
+        
+        if (currentTabSpan != null && currentTab == null) {
+            currentTab = currentTabSpan.textContent 
+        }
+        
+        if (currentTabSpan != null && currentTab == firstText) {
+            currentTab = secondText
+            // currentTabSpan.textContent = secondText
+            // slide(currentTabSpan, {})
+            anime({
+                targets : currentTabSpan,
+                translateX: {
+                    value: "93%",
+                    easing: 'easeInOutExpo',
+                    duration: 500
+                },
+                textContent: {
+                    value: secondText,
+                    delay: 400
+                }
+            })
 
-    //     if (current = firstText) {
-    //         if (toggle) {
-    //           toggle.textContent = secondText
-    //         }
-    //         anime({
-    //             targets: toggle,
-    //             translateX: "100%"
-    //         })
+        } else if (currentTabSpan != null && currentTab == secondText) {
+            currentTab = firstText
+            // currentTabSpan.textContent = firstText
+            // slide(currentTabSpan, {axis : "x"})
+            anime({
+                targets: currentTabSpan,
+                translateX: {
+                    value: "-=93%",
+                    easing: 'easeInOutExpo',
+                    duration: 500
+                },
+                textContent: {
+                    value: firstText,
+                    enddelay: 400
+                }
+            })
 
-    //     } else if (current === secondText) {
-    //         if (toggle) {
-    //           toggle.textContent = firstText
-    //         }
-    //         anime({
-    //             targets: toggle,
-    //             translateX: "100%"
-    //         })
-    //     } 
+        }
 
-    // }
+
+    }
 </script>
 
-<div class="mx-8 shadow rounded-full h-10 mt-4 flex p-1 relative items-center" id="tab-switch-wrapper">
+<div class="mx-8 shadow rounded-full h-10 mt-4 flex p-1 relative items-center">
     <div class="w-full flex justify-center">
-        <button>{firstText}</button>
+        <button on:click="{toggleTab}">{firstText}</button>
     </div>
     <div class="w-full flex justify-center">
-        <button>{secondText}</button>
+        <button on:click="{toggleTab}">{secondText}</button>
     </div>
-    <span 
-    class="elSwitch bg-indigo-600 shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute left-1 ">
+    <span
+    id="current-tab" 
+    class="bg-indigo-600 shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 top-[4px] absolute">
     {firstText}
     </span>
+
 </div>
