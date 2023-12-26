@@ -17,9 +17,9 @@
   <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
     <ul class="space-y-1.5">
 
-      {#each [...Array(12).keys()] as grade}
+      {#each [9, 10 ,11, 12] as grade}
         <li class="hs-accordion" id="account-accordion">
-          <SidebarButton name={`Grade ${grade+1}`}/>
+          <SidebarButton name={`Grade ${grade}`}/>
 
           <div id="account-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
             <ul class="pt-2 ps-2">
