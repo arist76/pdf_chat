@@ -2,6 +2,7 @@
     import TabSwitch from "./tabSwitch.svelte";
     import AiChat from "./AIChat/AIChat.svelte";
     import {currentTab} from '$lib/store'
+	import Forum from "./Forum/Forum.svelte";
 
 </script>
 
@@ -10,11 +11,11 @@
     <div class="w-1/3 mb-5">
         <TabSwitch/>
     </div>
-    <div>
+    <div class="w-full">
         {#if $currentTab == "chat" || currentTab == null}
             <AiChat/>
         {:else}
-            <h2>Bye</h2>
+            <Forum/>
         {/if}
     </div>
 
