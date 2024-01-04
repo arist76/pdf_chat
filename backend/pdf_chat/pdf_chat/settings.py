@@ -132,3 +132,22 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+
+DEFAULT_SUBJECTS = {
+    "biology": "biology",
+    "chemistry": "chemistry",
+    "physics": "physics",
+    "math": "math",
+    "english": "english",
+    "agriculture": "agriculture"
+}
+
+GRADES = {
+    "9" : "grade nine",
+    "10" : "grade ten",
+    "11" : "grade eleven",
+    "12" : "grade twelve",
+}
+
+AI_CHAT_LENGTH = 5
