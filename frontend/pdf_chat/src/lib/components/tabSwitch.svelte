@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="mx-8 shadow rounded-full h-10 mt-4 flex p-1 relative items-center">
+<div class="mx-8 shadow rounded-full h-10 mt-4 flex p-1 relative items-center text-xs w-[10rem] md:w-full md:text-base">
     
     <div class="w-full flex justify-center">
         <button on:click="{toggleTab}">{firstText}</button>
