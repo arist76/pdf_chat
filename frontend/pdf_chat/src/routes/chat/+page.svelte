@@ -6,7 +6,7 @@
 </script>
 
 <div class="flex">
-  <div class="bg-gray-50 dark:bg-slate-900">
+  <div class="bg-gray-50 w-full dark:bg-slate-900">
     <TopBreadcrumb/>
     <Sidebar/>
     <ChatBody/>
