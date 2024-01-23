@@ -1,15 +1,14 @@
 from rest_framework import serializers 
-from models import ChatMessage, Chat
+from chat.models import ChatMessage, Chat
 
-
-class ChatSerializer(serializers.ModelSerializer):
-    messages = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    
-    class Meta:
-        model = Chat
-
-
-class ChatMessageSerializer():
-    
+class ChatMessageSerializer(serializers.ModelSerializer):    
     class Meta:
         model = ChatMessage
+        exclude = ["chat"]
+
+class ChatSerializer(serializers.ModelSerializer):
+    messages = ChatMessageSerializer(many=True)
+
+    class Meta:
+        model = Chat
+        fields = "__all__"

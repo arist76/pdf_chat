@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from chromadb.utils import embedding_functions
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "drf_yasg",
+
+    "chat"
 ]
 
 MIDDLEWARE = [
@@ -151,3 +155,11 @@ GRADES = {
 }
 
 AI_CHAT_LENGTH = 5
+
+# change your embedding model here
+CHAT_EMBEDDING_MODEL= embedding_functions.DefaultEmbeddingFunction()
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
