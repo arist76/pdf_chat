@@ -40,6 +40,8 @@ class PDF(models.Model):
     __embedded = False
     __client = chromadb.PersistentClient()
 
+    # TODO : add pdf deletion side effect on PDF deletion
+
     def embed(self):
         if not self.__embedded:
             # load pdf file
@@ -60,10 +62,12 @@ class PDF(models.Model):
                 f"{self.grade}_{self.subject}", 
                 embedding_function=CHAT_EMBEDDING_MODEL
             )
+            print("Ids: ", [type(str(splited_docs.index(x))) for x in splited_docs][0],)
+            print("Splited docs: ", type(splited_docs[0]))
 
             collection.add(
                 ids=[str(splited_docs.index(x)) for x in splited_docs],
-                documents=splited_docs,
+                documents=list(splited_docs),
             )
 
             self.__embedded = True
