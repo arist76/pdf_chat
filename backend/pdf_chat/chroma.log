@@ -1,0 +1,41 @@
+[33mWARNING[0m:  [08-02-2024 14:31:26] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048576. chroma_server_nofile will not be set.
+[32mINFO[0m:     [08-02-2024 14:31:26] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [08-02-2024 14:31:26] Starting component System
+[36mDEBUG[0m:    [08-02-2024 14:31:26] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [08-02-2024 14:31:26] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [08-02-2024 14:31:26] Starting component SqliteDB
+[36mDEBUG[0m:    [08-02-2024 14:31:30] Starting component Posthog
+[36mDEBUG[0m:    [08-02-2024 14:31:30] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [08-02-2024 14:31:30] Starting component SegmentAPI
+[32mINFO[0m:     [08-02-2024 14:31:30] Started server process [[36m154557[0m]
+[32mINFO[0m:     [08-02-2024 14:31:30] Waiting for application startup.
+[32mINFO[0m:     [08-02-2024 14:31:30] Application startup complete.
+[32mINFO[0m:     [08-02-2024 14:31:30] Uvicorn running on [1mhttp://localhost:8001[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [08-02-2024 14:31:33] 127.0.0.1:52148 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:34:09] 127.0.0.1:51452 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:16] 127.0.0.1:49866 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:21] 127.0.0.1:49866 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:23] Shutting down
+[32mINFO[0m:     [08-02-2024 14:48:24] Waiting for application shutdown.
+[32mINFO[0m:     [08-02-2024 14:48:24] Application shutdown complete.
+[32mINFO[0m:     [08-02-2024 14:48:24] Finished server process [[36m154557[0m]
+[33mWARNING[0m:  [08-02-2024 14:48:30] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048576. chroma_server_nofile will not be set.
+[32mINFO[0m:     [08-02-2024 14:48:30] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component System
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component SqliteDB
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component Posthog
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [08-02-2024 14:48:30] Starting component SegmentAPI
+[32mINFO[0m:     [08-02-2024 14:48:30] Started server process [[36m168514[0m]
+[32mINFO[0m:     [08-02-2024 14:48:30] Waiting for application startup.
+[32mINFO[0m:     [08-02-2024 14:48:30] Application startup complete.
+[32mINFO[0m:     [08-02-2024 14:48:30] Uvicorn running on [1mhttp://localhost:8001[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [08-02-2024 14:48:33] 127.0.0.1:37598 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:35] 127.0.0.1:37598 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:36] 127.0.0.1:37598 - "GET /api/v1/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-02-2024 14:48:47] Shutting down
+[32mINFO[0m:     [08-02-2024 14:48:47] Waiting for application shutdown.
+[32mINFO[0m:     [08-02-2024 14:48:47] Application shutdown complete.
+[32mINFO[0m:     [08-02-2024 14:48:47] Finished server process [[36m168514[0m]

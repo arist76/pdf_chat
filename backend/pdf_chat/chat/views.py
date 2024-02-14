@@ -1,15 +1,36 @@
 from rest_framework.generics import ListCreateAPIView
-from chat.models import Chat, ChatMessage
-from chat.serializers import ChatSerializer
+from rest_framework.request import Request
+from rest_framework.response import Response
+from chat.models import Chat, ChatMessage, PDF
+from chat.serializers import ChatMessageSerializer, ChatSerializer
+from pdf_chat import settings
 
 class ChatView(ListCreateAPIView):
-    serializer_class = ChatSerializer
+    serializer_class = ChatMessageSerializer
     
     def get_queryset(self):
-        chat = Chat.objects.get(pk=1)
-        chat.messages = ChatMessage.objects.all()
+        return ChatMessage.objects.filter(chat__user=self.request.user)
 
-        return [chat]
 
-    def create(self, request, *args, **kwargs):
-        return "hello"
+    def create(self, request : Request, *args, **kwargs):
+        
+        # create chat message
+        chat_message_s = ChatMessageSerializer(
+            data=request.data, 
+            context={"request":request}
+        )
+        chat_message_s.is_valid()
+        chat_message : ChatMessage = chat_message_s.save()
+        
+        # make a query
+        q = chat_message.pdf.query(chat_message.text, request.user)
+
+        # save the ai response 
+        ai_reponse = ChatMessage.objects.create(
+            chat=chat_message.chat,
+            type="Ai",
+            text=q.get("answer"),
+        )
+
+        # return to user
+        return Response(q)

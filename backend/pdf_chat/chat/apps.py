@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-import chromadb 
 from pdf_chat import settings
 
 class ChatConfig(AppConfig):

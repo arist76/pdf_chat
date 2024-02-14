@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from chromadb.utils import embedding_functions
+from langchain_community import embeddings 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -156,10 +156,14 @@ GRADES = {
 
 AI_CHAT_LENGTH = 5
 
-# change your embedding model here
-CHAT_EMBEDDING_MODEL= embedding_functions.DefaultEmbeddingFunction()
-
-
+# the embedding model here
+CHAT_EMBEDDING_MODEL= embeddings.SentenceTransformerEmbeddings()
+# the chroma db directory here
+CHROMA_DB_DIR = "../chromadb"
+# the LLM's context message number
+MESSAGE_CONTEXT_COUNT = 20
+# default LLM
+# DEFAULT_LLM = 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
