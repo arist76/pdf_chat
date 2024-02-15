@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from langchain_community import embeddings 
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "drf_yasg",
+
+    "chat"
 ]
 
 MIDDLEWARE = [
@@ -132,3 +136,34 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+
+DEFAULT_SUBJECTS = {
+    "biology": "biology",
+    "chemistry": "chemistry",
+    "physics": "physics",
+    "math": "math",
+    "english": "english",
+    "agriculture": "agriculture"
+}
+
+GRADES = {
+    "9" : "grade nine",
+    "10" : "grade ten",
+    "11" : "grade eleven",
+    "12" : "grade twelve",
+}
+
+AI_CHAT_LENGTH = 5
+
+# the embedding model here
+CHAT_EMBEDDING_MODEL= embeddings.SentenceTransformerEmbeddings()
+# the chroma db directory here
+CHROMA_DB_DIR = "../chromadb"
+# the LLM's context message number
+MESSAGE_CONTEXT_COUNT = 20
+# default LLM
+# DEFAULT_LLM = 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
