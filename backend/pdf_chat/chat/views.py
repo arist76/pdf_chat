@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from chat.models import Chat, ChatMessage, PDF
 from chat.serializers import ChatMessageSerializer, ChatSerializer
 from pdf_chat import settings
+import pprint
 
 class ChatView(ListCreateAPIView):
     serializer_class = ChatMessageSerializer
@@ -29,8 +30,8 @@ class ChatView(ListCreateAPIView):
         ai_reponse = ChatMessage.objects.create(
             chat=chat_message.chat,
             type="Ai",
-            text=q.get("answer"),
+            text=q,
         )
 
         # return to user
-        return Response(q)
+        return Response({"answer" : q})
