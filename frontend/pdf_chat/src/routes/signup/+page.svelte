@@ -1,9 +1,77 @@
 <script lang="ts">
+  import { toast } from '@zerodevx/svelte-toast'
   import TextInput from "$lib/inputs/+textInput.svelte";
   import SelectInput from "$lib/inputs/+selectInput.svelte";
   import ThemeToggle from "$lib/components/themeToggle.svelte";
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  let value;
+
+  let formData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    username: '',
+    gender: '',
+    grade: '',
+    password: '',
+    repeatPassword: '',
+    termsAccepted: false,
+  };
 
 
+  export const validatePassword = (password:string)  =>{
+	const minLength = 8;
+	const hasUpperCase = /[A-Z]/.test(password);
+	const hasLowerCase = /[a-z]/.test(password);
+	const hasNumbers = /\d/.test(password);
+	const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  
+	const isValidLength = password.length > minLength;
+	const isValidPassword = hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
+  
+	return isValidLength && isValidPassword;
+  }
+  
+  const handleSubmit = async () => {
+
+      // Perform form submission logic, such as validation and sending to an API
+      if (formData.password !== formData.repeatPassword) {
+        toast.push('Passwords do not match.')
+        return;
+      }
+
+      if (!validatePassword(formData.password)) {
+        toast.push('Password must be longer than 8 characters and include uppercase, lowercase, numbers, and special characters.');
+        return;
+      }
+  
+      try {
+        const response = await fetch('host' + "/auth/users/", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username:formData.username, email:formData.email, password:formData.password }),
+        });
+
+  
+        if (!response.ok) {
+          toast.push('Someting went wrong, Please try again!.')
+          return
+        }
+  
+        toast.push('Registration successful') 
+        // if the registration succefuul then log the user in 
+        // login(formData.username,formData.password)
+
+      } catch (error) {
+        toast.push('Someting went wrong, Plase try again!.')
+        return
+      }
+    };
 </script>
 
 <!-- Hero -->
@@ -36,7 +104,8 @@
   
         <div>
           <!-- Form -->
-          <form>
+            <form on:submit|preventDefault={handleSubmit}>
+
             <div class="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
               <!-- Card -->
               <div class="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-slate-900">
@@ -44,7 +113,7 @@
                   <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Start your free trial</h1>
                   <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     Already have an account?
-                    <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
+                    <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/signin">
                       Sign in here
                     </a>
                   </p>
@@ -68,7 +137,15 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <TextInput type="text" placeholder="First name" required={true}/>
+                      <TextInput type="text" placeholder="First name" bind:value={formData.firstName} required={true}/>
+                                   <!-- End Floating Input -->
+                    </div>
+                    <!-- End Input Group -->
+  
+                    <!-- Input Group -->
+                    <div>
+                      <!-- Floating Input -->
+                      <TextInput type="text" placeholder="Last name" bind:value={formData.lastName} required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -76,7 +153,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <TextInput type="text" placeholder="Last name" required={true}/>
+                      <TextInput type="email" placeholder="Email" bind:value={formData.email} required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -84,15 +161,7 @@
                     <!-- Input Group -->
                     <div>
                       <!-- Floating Input -->
-                      <TextInput type="email" placeholder="Email" required={true}/>
-                      <!-- End Floating Input -->
-                    </div>
-                    <!-- End Input Group -->
-  
-                    <!-- Input Group -->
-                    <div>
-                      <!-- Floating Input -->
-                      <TextInput type="text" placeholder="Username" required={true}/>
+                      <TextInput type="text" placeholder="Username" bind:value={formData.username} required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -100,17 +169,17 @@
                     <!-- Input Group -->
                     <div class="relative col-span-full grid grid-cols-2 gap-4">
                       <div>
-                        <SelectInput label="Gender" options={["Male", "Female"]}/>
+                        <SelectInput label="Gender" options={["Male", "Female"]} bind:selectedValue={formData.gender}/>
                       </div>
                       <div>
-                        <SelectInput label="Grade" options="{[...Array(12).keys()].map(n => `Grade ${n+1}`)}"/>
+                          <SelectInput label="Grade" options="{[...Array(12).keys()].map(n => `Grade ${n+1}`)}" bind:selectedValue={formData.grade}/>
                       </div>
                     </div>
   
                     <!-- Input Group -->
                     <div class="relative col-span-full">
                       <!-- Floating Input -->
-                    <TextInput  type="password" placeholder="Password" required={true}/>
+                    <TextInput type="password" placeholder="Password" bind:value={formData.password} required={true}/>
 
                       <!-- End Floating Input -->
                     </div>
@@ -119,7 +188,7 @@
                     <!-- Input Group -->
                     <div class="col-span-full">
                       <!-- Floating Input -->
-                      <TextInput  type="password" placeholder="Repeat password" required={true}/>
+                      <TextInput type="password" placeholder="Repeat password" bind:value={formData.repeatPassword} required={true}/>
                       <!-- End Floating Input -->
                     </div>
                     <!-- End Input Group -->
@@ -129,10 +198,10 @@
                   <!-- Checkbox -->
                   <div class="mt-5 flex items-center">
                     <div class="flex">
-                      <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
+                      <input id="termsAccepted" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" bind:checked={formData.termsAccepted}>
                     </div>
                     <div class="ms-3">
-                      <label for="remember-me" class="text-sm dark:text-white">I accept the <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms and Conditions</a></label>
+                       <label for="termsAccepted"class="text-sm dark:text-white">I accept the <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms and Conditions</a></label>
                     </div>
                   </div>
                   <!-- End Checkbox -->

@@ -3,8 +3,12 @@
   export let type : string;
   export let placeholder : string;
   export let required : boolean;
+  export let value: string;
 
-
+  function handleInput(event: Event) {
+  const input = event.target as HTMLInputElement;
+  value = input.value;
+}
   const strongPassword = {
     "target": "#hs-strong-password-with-indicator-and-hint-in-popover",
     "hints": "#hs-strong-password-popover",
@@ -23,15 +27,16 @@
   autofill:pb-2
   outline-none"
   placeholder="********" 
+  on:input={handleInput}
   {required}/>
-  
-  <label for="hs-floating-underline-input-passowrd" class="absolute top-0 start-0 py-4 px-0 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-    peer-focus:text-xs
-    peer-focus:-translate-y-5
-    peer-focus:text-gray-500
-    peer-[:not(:placeholder-shown)]:text-xs
-    peer-[:not(:placeholder-shown)]:-translate-y-5
-    peer-[:not(:placeholder-shown)]:text-gray-500
-    text-gray-500">{placeholder}</label>
+    <label for="hs-floating-underline-input-passowrd" class="absolute top-0 start-0 py-4 px-0 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
+      peer-focus:text-xs
+      peer-focus:-translate-y-5
+      peer-focus:text-gray-500
+      peer-[:not(:placeholder-shown)]:text-xs
+      peer-[:not(:placeholder-shown)]:-translate-y-5
+      peer-[:not(:placeholder-shown)]:text-gray-500
+      text-gray-500">{placeholder}</label>
+
 </div>
 <!-- End Floating Input -->
