@@ -1,0 +1,30 @@
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# Environment variables
+.env
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
