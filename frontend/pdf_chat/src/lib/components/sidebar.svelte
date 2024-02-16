@@ -10,7 +10,7 @@
   <div class="px-6 flex justify-between items-center">
     <a class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Grade Up</a>
     <div class="">
-      <ThemeToggle/>
+      <!-- <ThemeToggle/> -->
     </div>
   </div>
 
