@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView
+from forum.serializers import RoomSerializer, ChatMessageSerializer
 
-# Create your views here.
+
+class RoomListView(ListCreateAPIView):
+    serializer_class = RoomSerializer
+    authentication_classes = [IsAuthenticated]
+
+class ChatMessageSerializer():
+    pass

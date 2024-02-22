@@ -20,7 +20,6 @@ export const register = async (username: string, email: string, password: string
 	try {
 		await axios.post(CONSTANTS.URL.REGISTER, {
 			username,
-			email,
 			password
 		});
 		return true;
