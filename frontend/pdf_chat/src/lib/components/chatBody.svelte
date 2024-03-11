@@ -9,6 +9,6 @@
         <TabSwitch currentTab='chat'/>
     </div>
     <div class="w-full">
-        <AiChat/>
+		<AiChat/>
     </div>
 </div>
