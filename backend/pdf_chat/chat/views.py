@@ -20,7 +20,7 @@ class ChatView(ListCreateAPIView):
             data=request.data, 
             context={"request":request}
         )
-        chat_message_s.is_valid()
+        chat_message_s.is_valid(raise_exception=True)
         chat_message : ChatMessage = chat_message_s.save()
         
         # make a query

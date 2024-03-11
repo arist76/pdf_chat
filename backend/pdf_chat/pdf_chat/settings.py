@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from langchain_community import embeddings 
+from langchain_community import embeddings
+from langchain_openai.embeddings import OpenAIEmbeddings 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -159,8 +160,9 @@ GRADES = {
 
 AI_CHAT_LENGTH = 5
 
+os.environ.setdefault("OPENAI_API_KEY", "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")
 # the embedding model here
-CHAT_EMBEDDING_MODEL= embeddings.SentenceTransformerEmbeddings()
+CHAT_EMBEDDING_MODEL= OpenAIEmbeddings()
 # the chroma db directory here
 CHROMA_DB_DIR = "../chromadb"
 # the LLM's context message number
