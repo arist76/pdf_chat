@@ -1,13 +1,16 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from chat.models import Chat, ChatMessage, PDF
 from chat.serializers import ChatMessageSerializer, ChatSerializer
 from pdf_chat import settings
-import pprint
+
 
 class ChatView(ListCreateAPIView):
     serializer_class = ChatMessageSerializer
+    filterset_fields = ["chat__subject", "chat__grade"]
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         return ChatMessage.objects.filter(chat__user=self.request.user)

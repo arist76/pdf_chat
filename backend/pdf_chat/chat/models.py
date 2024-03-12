@@ -61,7 +61,7 @@ class PDF(models.Model):
         )
         docs = vectordb.similarity_search(q, k=5)
 
-        chain = load_qa_chain(ChatOpenAI(), chain_type="stuff")
+        chain = load_qa_chain(ChatOpenAI())
         output = chain.run(input_documents=docs, question=q)
 
         return output
