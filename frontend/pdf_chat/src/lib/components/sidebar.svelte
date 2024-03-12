@@ -9,9 +9,6 @@
 
   <div class="px-6 flex justify-between items-center">
     <a class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Grade Up</a>
-    <div class="">
-      <!-- <ThemeToggle/> -->
-    </div>
   </div>
 
   <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
@@ -35,7 +32,12 @@
         </li>
       {/each}  
     </ul>
-
   </nav>
+
+	<!--Buttons-->
+  <div class="fixed bottom-0 w-full h-auto p-4 flex items-center justify-center font-semibold text-blue-900 text-sm"> 
+		<button on:click class="bg-white px-6 py-1 border rounded-sm"> Logout </button>
 </div>
+</div>
+
 <!-- End Sidebar -->

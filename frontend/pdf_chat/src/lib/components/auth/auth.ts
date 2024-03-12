@@ -28,6 +28,16 @@ export const register = async (username: string, email: string, password: string
 	}
 };
 
+export const logOut = () => {
+	try {
+		localStorage.removeItem('auth_token');
+		return true
+	} catch(e) {
+		console.log(e)
+		return false
+	}
+};
+
 export const validatePassword = (password: string) => {
 	const minLength = 8;
 	const hasUpperCase = /[A-Z]/.test(password);

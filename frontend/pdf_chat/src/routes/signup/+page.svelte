@@ -59,7 +59,7 @@
 
 <div class="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-slate-900 dark:bg-slate-950">
   <div class="absolute top-10 left-10 w-auto h-auto">
-    <ThemeToggle/>
+    <!--<ThemeToggle/>-->
   </div>
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <!-- Grid -->
@@ -101,8 +101,6 @@
                 </div>
   
                 <div class="mt-5">
-              
-  
   
                   <!-- Grid -->
                   <div class="grid grid-cols-2 gap-4">

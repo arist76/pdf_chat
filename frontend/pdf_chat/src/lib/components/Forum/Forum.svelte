@@ -1,37 +1,37 @@
-<script>
+<script lang="ts">
     const forumData = [
-      {
-        name: "Jane Smith",
-        message: "Aliquam erat volutpat. In hac habitasse platea dictumst. Optio itaque consectetur adipisicing elit. Optio itaque consectetur adipisicing elit. Optio itaque?",
-        timestamp: "2 hours ago",
-        likes: 5,
-        dislikes: 1,
-        imgUrl: "https://img.freepik.com/free-photo/portrait-confident-businesswoman-glasses_1262-20950.jpg"
-      },
-      {
-        name: "Alex Johnson",
-        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        timestamp: "1 day ago",
-        likes: 3,
-        dislikes: 0,
-        imgUrl: "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
-      },
-      {
-        name: "Samantha Lee",
-        message: "Etiam porta sem malesuada magna mollis euismod.",
-        timestamp: "1 week ago",
-        likes: 8,
-        dislikes: 2,
-        imgUrl: "https://img.freepik.com/free-photo/portrait-young-woman-with-glasses_1139-844.jpg"
-      }
+	  {
+		name: "Jane Smith",
+		message: "Aliquam erat volutpat. In hac habitasse platea dictumst. Optio itaque consectetur adipisicing elit. Optio itaque consectetur adipisicing elit. Optio itaque?",
+		timestamp: "2 hours ago",
+		likes: 5,
+		dislikes: 1,
+		imgUrl: "https://img.freepik.com/free-photo/portrait-confident-businesswoman-glasses_1262-20950.jpg"
+	  },
+	  {
+		name: "Alex Johnson",
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+		timestamp: "1 day ago",
+		likes: 3,
+		dislikes: 0,
+		imgUrl: "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
+	  },
+	  {
+		name: "Samantha Lee",
+		message: "Etiam porta sem malesuada magna mollis euismod.",
+		timestamp: "1 week ago",
+		likes: 8,
+		dislikes: 2,
+		imgUrl: "https://img.freepik.com/free-photo/portrait-young-woman-with-glasses_1139-844.jpg"
+	  }
     ];
   </script>
 
-<section class="w-full h-auto mt-14 flex flex-col justify-center items-center gap-6 min-w-full">
+<section class="w-full h-screen mt-14 flex flex-col justify-center items-center gap-6 min-w-full">
 
     {#each forumData as data}
     <!-- card container -->
-    <div class='bg-gray-100 w-full p-4 flex flex-col max-w-4xl md:px-8 md:py-1'>
+    <div class='bg-gray-100 w-full h-auto p-4 flex flex-col max-w-4xl md:px-8 md:py-1'>
         <!-- profile wrapper-->
         <div class="m-4 flex items-center">
             <div class="w-12 h-12 rounded-full flex justify-center items-center overflow-hidden">
@@ -68,7 +68,7 @@
     {/each}
 
      <!-- Send Message -->
-     <div class="sticky w-full bottom-0 z-10 bg-white border-t border-gray-200 pt-2 pb-3 sm:pt-4 sm:pb-6 dark:bg-slate-900 dark:border-gray-700">
+     <div class="fixed w-full bottom-0 pb-6 z-10 bg-white border-t border-gray-200 pt-2 sm:pt-4 sm:pb-6 dark:bg-slate-900 dark:border-gray-700">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Input -->
           <div class="relative">
