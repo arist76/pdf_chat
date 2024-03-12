@@ -11,5 +11,4 @@
     <Sidebar/>
     <ChatBody/>
   </div>
-
 </div>

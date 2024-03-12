@@ -3,9 +3,17 @@
 	import { postChat } from "$lib/api/postChat";
   import aiSparkle from "$lib/images/aiSparkle.png"
 	import { createMutation, createQuery, useQueryClient } from "@tanstack/svelte-query";
+  import { page } from "$app/stores";
 
+  const { params }  = $page
+  console.log(params)
   const queryClient = useQueryClient()
-  const chats = createQuery({queryKey: ['chats'],queryFn: getChat,})
+  const chats = createQuery(
+    {
+      queryKey: ['chats'],
+      queryFn: () => getChat(params.grade, params.subject),
+    }
+  )
   const createChat = createMutation({mutationFn: postChat})
   let messageText = '';
 

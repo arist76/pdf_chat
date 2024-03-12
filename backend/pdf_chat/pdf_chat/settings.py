@@ -14,10 +14,13 @@ from pathlib import Path
 from langchain_community import embeddings
 from langchain_openai.embeddings import OpenAIEmbeddings 
 import os
+import dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -165,7 +168,6 @@ GRADES = {
 
 AI_CHAT_LENGTH = 5
 
-os.environ.setdefault("OPENAI_API_KEY", "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")
 # the embedding model here
 CHAT_EMBEDDING_MODEL= OpenAIEmbeddings()
 # the chroma db directory here

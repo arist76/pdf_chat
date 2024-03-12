@@ -19,6 +19,9 @@ class Room(models.Model):
         if not self.title_slug:
             self.title_slug = slugify(self.title)
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"Room {self.id}, Owner {self.owner.id}"
 
 class ChatMessage(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -27,4 +30,7 @@ class ChatMessage(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Message {self.id}, Room {self.room.id}"
 

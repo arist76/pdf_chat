@@ -7,15 +7,15 @@ class RoomSerializer(serializers.ModelSerializer):
     
     def to_internal_value(self, data):
         data["title_slug"] = slugify(data["title"])
-        return data
+        return super().to_internal_value(data)
     class Meta:
         model = Room
-        exclude = ["owner"]
-        read_only_fields = ["title_slug", "views", "upvotes", "downvotes"]
+        fields = "__all__"
+        read_only_fields = ["title_slug", "views", "upvotes", "downvotes", "owner"]
 
 class ChatMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMessage
-        exclude = ["user"]
-        read_only_fields = ["upvotes", "downvotes", "date", "room"]
+        fields = "__all__"
+        read_only_fields = ["upvotes", "downvotes", "date", "room", "user"]
         
