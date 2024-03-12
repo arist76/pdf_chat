@@ -2,15 +2,18 @@
     import { goto } from '$app/navigation';
     import { toast } from '@zerodevx/svelte-toast';
 	  import { login } from '$lib/components/auth/auth';
-
+    import { getCookieValue } from '$lib/utils';
     let username = '';
     let password = '';
 
     const handleSubmit = async () => {
+      let grade = getCookieValue("grade")
+      let subject = getCookieValue("subject")
+
       const response = await login(username,password)
       if (response) {
         toast.push('Login successful')
-        goto('/');
+        goto(`/chat/${grade}/${subject}`);
       } else {
         toast.push('Something went wrong, try again')
       }
