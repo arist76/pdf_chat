@@ -1,5 +1,5 @@
 import { CONSTANTS } from '$lib/constants';
-import { authToken } from '$lib/store';
+import { token } from '$lib/store';
 import axios from 'axios';
 import { get } from 'svelte/store';
 
@@ -21,7 +21,7 @@ export const postChat = async ({text, grade, subject}:{text:string,grade:string,
 		},
 		{
 			headers: {
-				Authorization: `token ${token}`
+				Authorization: `token ${tokenVal}`
 			}
 		}
 	);
