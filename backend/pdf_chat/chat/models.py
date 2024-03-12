@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from pdf_chat import settings
 from pdf_chat.settings import MEDIA_ROOT
 from chat.chain import RESPONSE_TEMPLATE, TogetherLLM
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains.question_answering import load_qa_chain
@@ -12,6 +12,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
+from langchain_openai.chat_models import ChatOpenAI
 import os
 
 
@@ -32,7 +33,7 @@ class PDF(models.Model):
     def embed(self):
         print(self.__embedded)
         if not self.__embedded:
-            # load pdf file
+            # load pdf fileuuuuu
             print("splitting pdf")
             docs = PyPDFLoader(
                 os.path.join(
@@ -53,74 +54,17 @@ class PDF(models.Model):
             self.__embedded = True
     
     def query(self, q, user):
-        chat = [
-            HumanMessage(content=message.text)
-                if message.type == "Human"
-                else AIMessage(content="Large language model") 
-                    for message in ChatMessage.objects.filter(
-                        chat__user=user,
-                        chat__subject=self.subject,
-                        chat__grade=self.grade
-                    )
-        ]
-
-
-
-        contextualize_q_system_prompt = """Given a chat history and the latest user question \
-        which might reference context in the chat history, formulate a standalone question \
-        which can be understood without the chat history. Do NOT answer the question, \
-        just reformulate it if needed and otherwise return it as is."""
-        contextualize_q_prompt = ChatPromptTemplate.from_messages(
-            [
-                ("system", contextualize_q_system_prompt),
-                MessagesPlaceholder(variable_name="chat_history"),
-                ("human", "{question}"),
-            ]
-        )
-        contextualize_q_chain = contextualize_q_prompt | TogetherLLM() | StrOutputParser()
-
-        repharsed_q = contextualize_q_chain.invoke(
-            {
-                "chat_history": chat,
-                "question": q,
-            }
-        )
-
-        qa_prompt = ChatPromptTemplate.from_messages(
-            [
-                ("system", RESPONSE_TEMPLATE),
-                MessagesPlaceholder(variable_name="chat_history"),
-                ("human", "{question}"),
-            ]
-        )
-
-        def contextualized_question(input: dict):
-            if input.get("chat_history"):
-                return contextualize_q_chain
-            else:
-                return input["question"]
-            
-
         vectordb = Chroma(
-            persist_directory=settings.CHROMA_DB_DIR, 
+            collection_name = f"{self.subject}_{self.grade}",
             embedding_function = settings.CHAT_EMBEDDING_MODEL,
-            collection_name = f"{self.subject}_{self.grade}"
-        ).as_retriever()
-
-        docs = vectordb.get_relevant_documents(q)
-        format_docs = "\n\n".join(doc.page_content for doc in docs)
-
-        rag_chain = (
-            RunnablePassthrough.assign(
-                context=(lambda input : contextualize_q_chain if input.get("chat_history") else input["question"] | vectordb | format_docs)
-            )
-            | qa_prompt
-            | TogetherLLM()
+            persist_directory=settings.CHROMA_DB_DIR
         )
+        docs = vectordb.similarity_search(q, k=5)
 
+        chain = load_qa_chain(ChatOpenAI())
+        output = chain.run(input_documents=docs, question=q)
 
-        return rag_chain.invoke({"question": q, "chat_history": chat})
-
+        return output
     
     def save(self, *args, **kwargs):
         print("saving pdf...")
@@ -143,6 +87,9 @@ class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subject = models.CharField(max_length=150, choices=settings.DEFAULT_SUBJECTS)
     grade = models.CharField(max_length=2, choices=settings.GRADES)
+    
+    class Meta:
+        unique_together = ["user", "subject", "grade"]
 
     def __str__(self) -> str:
         return f"{self.user.username}'s chat"

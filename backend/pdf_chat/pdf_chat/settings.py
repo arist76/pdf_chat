@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from langchain_community import embeddings 
+from langchain_community import embeddings
+from langchain_openai.embeddings import OpenAIEmbeddings 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-nzmrfteez6x+1=-r+629m3mc_!%3p4#7@6dwo28!on0%vjc1bd
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173"]
 
 
 # Application definition
@@ -46,8 +47,10 @@ INSTALLED_APPS = [
     "djoser",
     "drf_yasg",
     "corsheaders",
+    "django_filters",
 
-    "chat"
+    "chat",
+    "forum"
 ]
 
 MIDDLEWARE = [
@@ -138,6 +141,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
 
 
@@ -159,8 +165,9 @@ GRADES = {
 
 AI_CHAT_LENGTH = 5
 
+os.environ.setdefault("OPENAI_API_KEY", "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")
 # the embedding model here
-CHAT_EMBEDDING_MODEL= embeddings.SentenceTransformerEmbeddings()
+CHAT_EMBEDDING_MODEL= OpenAIEmbeddings()
 # the chroma db directory here
 CHROMA_DB_DIR = "../chromadb"
 # the LLM's context message number

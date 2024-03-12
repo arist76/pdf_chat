@@ -5,8 +5,7 @@ class ChatSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Chat
-        fields = "__all__"
-        read_only_fields = ["user"]
+        exclude = ["user"]
 
 class ChatMessageSerializer(serializers.ModelSerializer):    
     chat = ChatSerializer()
@@ -18,13 +17,10 @@ class ChatMessageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         chat_data = validated_data.pop("chat")
         # get or create chat
-        chat_s = ChatSerializer(data= {
-            "user" : self.context.get("request").user, 
-            **chat_data
-        })
+        chat_s = ChatSerializer(data=chat_data) 
         chat_s.is_valid(raise_exception=True)
 
-        chat, created = Chat.objects.get_or_create(**chat_s.data)
+        chat, created = Chat.objects.get_or_create(**chat_s.data, user=self.context["request"].user)
 
         return ChatMessage.objects.create(
             chat = chat,
