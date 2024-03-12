@@ -22,7 +22,7 @@
             <ul class="pt-2 ps-2">
               {#each subjects as subject}
               <li>
-                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-lg hover:bg-blue-600" href="#">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-lg hover:bg-blue-600" href="http://127.0.0.1:5173/chat/{grade}/{subject.toLowerCase()}">
                   {subject}
                 </a>
               </li>
