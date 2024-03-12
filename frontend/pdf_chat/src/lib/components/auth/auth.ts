@@ -9,7 +9,7 @@ export const login = async (username: string, password: string) => {
 		});
 
 		const data = await response.data;
-		localStorage.setItem('auth_token', data.auth_token);
+   	    document.cookie = "auth_token" + "=" + data.auth_token + "; path=/";
 		return true;
 	} catch (error) {
 		return false;
@@ -30,11 +30,12 @@ export const register = async (username: string, email: string, password: string
 
 export const logOut = () => {
 	try {
-		localStorage.removeItem('auth_token');
-		return true
-	} catch(e) {
-		console.log(e)
-		return false
+		document.cookie = "auth_token" + "=" + "" + "; path=/";
+		document.cookie = `auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+		return true;
+	} catch (e) {
+		console.log(e);
+		return false;
 	}
 };
 

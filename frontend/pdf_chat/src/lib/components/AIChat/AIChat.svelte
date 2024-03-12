@@ -6,7 +6,6 @@
   import { page } from "$app/stores";
 
   const { params }  = $page
-  console.log(params)
   const queryClient = useQueryClient()
   const chats = createQuery(
     {
@@ -19,7 +18,7 @@
 
     
   function sendMessage() {
-    $createChat.mutate(messageText, {
+    $createChat.mutate({text: messageText, grade: params.grade, subject : params.subject}, {
     onSuccess: () => {
       messageText = '';
       queryClient.invalidateQueries({queryKey:['chats']})

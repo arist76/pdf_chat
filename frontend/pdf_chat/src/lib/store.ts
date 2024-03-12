@@ -1,10 +1,3 @@
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
-function getSavedToken() {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('auth_token');
-  }
-  return null;
-}
-
-export const authToken = writable(getSavedToken());
+export const token: Writable<null | string> = writable(null);

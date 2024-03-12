@@ -1,14 +1,26 @@
 <script lang="ts">
-  export let currentTab:string;
-  const firstText = "Chat";
-  const secondText = "Forum";
+    import { page } from "$app/stores";
+    import { browser } from "$app/environment";
+    import { getCookieValue } from "$lib/utils";
+    
+    export let currentTab:string;
+    const firstText = "Chat";
+    const secondText = "Forum";
+
+    let grade : string | null
+    let subject : string | null
+    if (browser) {
+        grade = getCookieValue("grade")
+        subject = getCookieValue("subject")
+    }
+
 
 </script>
 
 <div class="mx-8 shadow rounded-full h-10 mt-4 flex p-1 relative items-center text-xs w-[10rem] md:w-full md:text-base">
     
     <div class="w-full flex justify-center">
-        <a href="/chat">{firstText}</a>
+        <a href="/chat/{grade}/{subject}">{firstText}</a>
     </div>
     <div class="w-full flex justify-center">
         <a href="/forum">{secondText}</a>

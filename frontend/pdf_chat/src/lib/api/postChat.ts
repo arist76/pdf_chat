@@ -1,24 +1,25 @@
 import { CONSTANTS } from '$lib/constants';
-import { authToken } from '$lib/store';
+import { token } from '$lib/store';
 import axios from 'axios';
 import { get } from 'svelte/store';
 
-export const postChat = async (text: string) => {
-	const token = get(authToken)
+export const postChat = async ({text, grade, subject}:{text:string,grade:string,subject:string}) => {
+	
+	const tokenVal = get(token)
 
     // TODO: MAKE FORM DATA DYNAMIC
 	const response = await axios.post(
 		CONSTANTS.URL.CHAT,
 		{
 			chat: {
-				subject: 'biology',
-				grade: '9'
+				subject: subject,
+				grade: grade
 			},
 			text
 		},
 		{
 			headers: {
-				Authorization: `token ${token}`
+				Authorization: `token ${tokenVal}`
 			}
 		}
 	);

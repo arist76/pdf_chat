@@ -4,8 +4,6 @@
     import { afterNavigate } from "$app/navigation";
     import { browser } from '$app/environment'
     import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query'
-	import TopBreadcrumb from "$lib/components/topBreadcrumb.svelte";
-	import Sidebar from "$lib/components/sidebar.svelte";
 
     const queryClient = new QueryClient({
         defaultOptions: {
@@ -22,8 +20,6 @@
 
 <SvelteToast />
 <QueryClientProvider client={queryClient}>
-      <TopBreadcrumb/>
-      <Sidebar/>
     <slot />
 </QueryClientProvider>
 
