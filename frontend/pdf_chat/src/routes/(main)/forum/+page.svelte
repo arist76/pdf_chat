@@ -1,5 +1,4 @@
 <script>
-	import Forum from "$lib/components/Forum/Forum.svelte";
     import TabSwitch from "$lib/components/tabSwitch.svelte";
 	import ForumsList from "$lib/components/Forum/ForumsList.svelte";
 </script>
