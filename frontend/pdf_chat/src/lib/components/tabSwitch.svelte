@@ -7,8 +7,8 @@
     const firstText = "Chat";
     const secondText = "Forum";
 
-    let grade : string | null
-    let subject : string | null
+    let grade : string | null = "9"
+    let subject : string | null = "biology"
     if (browser) {
         grade = getCookieValue("grade")
         subject = getCookieValue("subject")
