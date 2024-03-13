@@ -13,9 +13,8 @@ class RoomSerializer(serializers.ModelSerializer):
         fields = "__all__"
         read_only_fields = ["title_slug", "views", "upvotes", "downvotes", "owner"]
 
-class ChatMessageSerializer(serializers.ModelSerializer):
+class RoomChatMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatMessage
         fields = "__all__"
         read_only_fields = ["upvotes", "downvotes", "date", "room", "user"]
-        
