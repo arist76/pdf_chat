@@ -1,14 +1,38 @@
 <script lang="ts">
-    export let name : String;
+	export let name;
+	export let onClick;
+	let on = false;
+
+	const handleClick = () => {
+		if (onClick) {
+			onClick();
+			on = !on;
+		}
+	};
 </script>
 
-<button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-lg hover:bg-blue-600">
-    <svg version="1.1" id="designs" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-     viewBox="0 0 32 32" xml:space="preserve" class="w-5 h-5">
-<style type="text/css">
-   .sketchy_een{fill:#ffffff;}
-</style>
-<path class="sketchy_een" d="M29.975,23.997c0-0.204-0.004-0.408-0.002-0.611c0.004-0.419,0.029-0.838,0.027-1.256
+<button
+	on:click={handleClick}
+	type="button"
+	class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-lg hover:bg-blue-600"
+>
+	<svg
+		version="1.1"
+		id="designs"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		viewBox="0 0 32 32"
+		xml:space="preserve"
+		class="w-5 h-5"
+	>
+		<style type="text/css">
+			.sketchy_een {
+				fill: #ffffff;
+			}
+		</style>
+		<path
+			class="sketchy_een"
+			d="M29.975,23.997c0-0.204-0.004-0.408-0.002-0.611c0.004-0.419,0.029-0.838,0.027-1.256
    c-0.002-0.891-0.021-1.78-0.041-2.669c-0.014-0.615,0.008-1.228-0.01-1.844c-0.008-0.33-0.027-0.66-0.037-0.99
    c-0.008-0.301-0.002-0.604-0.004-0.906c-0.006-1.359-0.115-2.713-0.116-4.072c0-0.604,0-1.209-0.004-1.813
    c-0.004-0.631,0.039-1.265,0.078-1.894c0.027-0.431-0.38-0.792-0.794-0.792c-0.028,0-0.05,0.013-0.077,0.016
@@ -114,9 +138,36 @@
    c-0.005,0-0.011,0-0.016,0c-0.454,0-0.828,0.396-0.828,0.844c0,0.46,0.384,0.844,0.844,0.844c0.633,0.002,1.265-0.01,1.9-0.029
    c0.491-0.014,0.978-0.039,1.469,0.006c0.204,0.019,0.433-0.097,0.573-0.237c0.151-0.151,0.239-0.359,0.239-0.573
    s-0.087-0.421-0.239-0.573C12.445,15.535,12.327,15.465,12.189,15.428z M11.758,15.428c-0.016,0.002-0.031,0.004-0.047,0.006
-   c0.017-0.002,0.034-0.005,0.051-0.007C11.761,15.428,11.759,15.428,11.758,15.428z"/>
-</svg>    
-{name}
-    <svg class="hs-accordion-active:block ms-auto hidden w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-    <svg class="hs-accordion-active:hidden ms-auto block w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   c0.017-0.002,0.034-0.005,0.051-0.007C11.761,15.428,11.759,15.428,11.758,15.428z"
+		/>
+	</svg>
+	{name}
+	{#if on}
+		<svg
+			class="hs-accordion-active:block ms-auto block w-4 h-4"
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"><path d="m18 15-6-6-6 6" /></svg
+		>
+	{:else}
+		<svg
+			class="hs-accordion-active:hidden ms-auto block w-4 h-4"
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg
+		>
+	{/if}
 </button>
+

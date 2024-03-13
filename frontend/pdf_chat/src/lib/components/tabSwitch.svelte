@@ -1,19 +1,12 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import { browser } from "$app/environment";
-    import { getCookieValue } from "$lib/utils";
     
     export let currentTab:string;
     const firstText = "Chat";
     const secondText = "Forum";
 
-    let grade : string | null = "9"
-    let subject : string | null = "biology"
-    if (browser) {
-        grade = getCookieValue("grade")
-        subject = getCookieValue("subject")
-		console.log(grade)
-    }
+    let grade : string | null = $page.params.grade 
+    let subject : string | null = $page.params.subject 
 
 
 </script>
@@ -24,7 +17,7 @@
         <a href="/chat/{grade}/{subject}">{firstText}</a>
     </div>
     <div class="w-full flex justify-center">
-        <a href="/forum">{secondText}</a>
+        <a href="/forum/{grade}/{subject}">{secondText}</a>
     </div>
     <span
     id="current-tab" 
