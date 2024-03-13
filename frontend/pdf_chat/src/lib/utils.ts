@@ -13,9 +13,10 @@ export const getCookieValue = (cookieName: string) => {
 };
 
 export const scrollToBottom = () => {
-	const windowHeight = window.innerHeight;
-	window.scrollTo({
-		top: document.body.scrollHeight + windowHeight,
-		behavior: 'smooth'
-	});
+	setTimeout(() => {
+		window.scrollTo({
+			top: document.documentElement.scrollHeight,
+			behavior: 'smooth'
+		});
+	}, 0);
 };

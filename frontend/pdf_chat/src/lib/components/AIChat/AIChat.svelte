@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { afterUpdate} from 'svelte';
 	import { getChat } from '$lib/api/getChat';
 	import { postChat } from '$lib/api/postChat';
 	import aiSparkle from '$lib/images/aiSparkle.png';
@@ -18,14 +19,12 @@
 
 	function sendMessage() {
 		if (newMessageRequest) {
-			scrollToBottom()
 			$createChat.mutate(
 				{ text: newMessageRequest, grade: params.grade, subject: params.subject },
 				{
 					onSuccess: () => {
 						queryClient.invalidateQueries({ queryKey: ['chats'] });
 						newMessageRequest = null;
-						scrollToBottom();
 					}
 				}
 			);
@@ -43,10 +42,15 @@
 			newMessageRequest = messageText;
 			// remove message from input filed and send message
 			messageText = null;
-			scrollToBottom();
 			sendMessage();
 		}
 	}
+
+	// Watch for changes in the createChat mutation and scroll to the bottom if it changes
+	afterUpdate(() => {
+		console.log('afterUpdate');
+		if ($chats.data || $createChat.data ) scrollToBottom();
+	});
 </script>
 
 <!-- Content -->
@@ -149,6 +153,10 @@
 						</div>
 					</div>
 				</li>
+
+				<script>
+					scrollToBottom();
+				</script>
 				<!-- End AI Chat Bubble -->
 			{/if}
 		</ul>
