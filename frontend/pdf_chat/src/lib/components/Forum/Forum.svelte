@@ -1,8 +1,16 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { downVoteForum, upVoteForum } from '$lib/api/postForum';
 	import { formatDateString } from '$lib/utils';
 	import type { ForumDetailTypes } from '../../../routes/(main)/types';
 
 	export let forumData: ForumDetailTypes[];
+	const handleUpVote = () => {
+		upVoteForum($page.params.slug);
+	};
+	const handleDownVote = () => {
+		downVoteForum($page.params.slug);
+	};
 </script>
 
 <section class="w-full h-atuo mt-14 flex flex-col justify-center items-center gap-6 min-w-full">
@@ -31,7 +39,7 @@
 			<div class="text-xs flex items-center p-4 gap-4 sm:text-sm">
 				<!-- like -->
 				<div class="flex gap-1">
-					<button class="w-4">
+					<button on:click={handleUpVote} class="w-4">
 						<svg
 							class="feather feather-thumbs-up stroke-blue-700 hover:stroke-black"
 							xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +59,7 @@
 
 				<!-- dislike -->
 				<div class="flex gap-1">
-					<button class="w-4">
+					<button on:click={handleDownVote} class="w-4">
 						<svg
 							class="feather feather-thumbs-down stroke-blue-700 hover:stroke-black"
 							xmlns="http://www.w3.org/2000/svg"
