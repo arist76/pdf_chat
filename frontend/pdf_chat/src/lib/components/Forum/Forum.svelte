@@ -1,85 +1,72 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { downVoteForum, upVoteForum } from '$lib/api/postForum';
-	import { formatDateString } from '$lib/utils';
+	import { downVoteForum, postForumAnswer, upVoteForum } from '$lib/api/postForum';
+	import { scrollToBottom } from '$lib/utils';
+	import { toast } from '@zerodevx/svelte-toast';
 	import type { ForumDetailTypes } from '../../../routes/(main)/types';
+	import ForumCard from './ForumCard.svelte';
+	import { afterUpdate } from 'svelte';
 
 	export let forumData: ForumDetailTypes[];
+	let slug = $page.params.slug;
+	let messageText: string | null = null;
+	let sentMessages: ForumDetailTypes[] = [];
+
+	function handleInput(event: Event & { currentTarget: HTMLTextAreaElement }) {
+		if (event.target instanceof HTMLTextAreaElement) {
+			messageText = event.target.value;
+		}
+	}
 	const handleUpVote = () => {
-		upVoteForum($page.params.slug);
+		upVoteForum(slug);
 	};
 	const handleDownVote = () => {
-		downVoteForum($page.params.slug);
+		downVoteForum(slug);
 	};
+
+	const handlePostAnswer = async () => {
+		if (messageText) {
+			const newMessage = {
+				id: sentMessages.length,
+				text: messageText,
+				date: Date(),
+				upvotes: 0,
+				downvotes: 0,
+				room: 0,
+				user: 0
+			};
+			sentMessages = [...sentMessages, newMessage];
+			let temp = messageText;
+			messageText = '';
+			const res = await postForumAnswer({ slug: slug, text: temp });
+			if (!res) {
+				sentMessages.pop();
+				messageText = temp;
+				toast.push('Failed To Sent Try Again!');
+			}
+		}
+	};
+
+	// Watch for changes in the createChat mutation and scroll to the bottom if it changes
+	afterUpdate(() => {
+		if (sentMessages) scrollToBottom();
+	});
 </script>
 
 <section class="w-full h-atuo mt-14 flex flex-col justify-center items-center gap-6 min-w-full">
 	{#each forumData as data (data.id)}
 		<!-- card container -->
-		<div class="bg-gray-100 w-full h-auto p-4 flex flex-col max-w-4xl md:px-8 md:py-1">
-			<!-- profile wrapper-->
-			<div class="m-4 flex items-center">
-				<div class="w-12 h-12 rounded-full flex justify-center items-center overflow-hidden">
-					<img
-						class="w-full h-full object-cover"
-						src={`https://xsgames.co/randomusers/assets/avatars/pixel/${data.id}.jpg`}
-						alt="Handsome man with glasses"
-					/>
-				</div>
-				<div class="ml-4">
-					<h1 class="font-bold text-xs my-1 sm:text-lg">{data.user}</h1>
-					<p class="text-xs">{formatDateString(data.date)}</p>
-				</div>
-			</div>
-
-			<!-- user message wrapper -->
-			<p class="p-2 text-xs max-w-full sm:text-sm md:ml-2">{data.text}</p>
-
-			<!-- interactions wrapper -->
-			<div class="text-xs flex items-center p-4 gap-4 sm:text-sm">
-				<!-- like -->
-				<div class="flex gap-1">
-					<button on:click={handleUpVote} class="w-4">
-						<svg
-							class="feather feather-thumbs-up stroke-blue-700 hover:stroke-black"
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							><path
-								d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"
-							></path></svg
-						>
-					</button>
-					<p><span class="text-blue-800">{data.upvotes}</span> likes</p>
-				</div>
-
-				<!-- dislike -->
-				<div class="flex gap-1">
-					<button on:click={handleDownVote} class="w-4">
-						<svg
-							class="feather feather-thumbs-down stroke-blue-700 hover:stroke-black"
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							><path
-								d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"
-							></path></svg
-						>
-					</button>
-					<p><span class="text-blue-800">{data.downvotes}</span> dislikes</p>
-				</div>
-			</div>
-		</div>
+		<ForumCard {data} handleUpVote={() => handleUpVote()} handleDownVote={() => handleDownVote()} />
 	{/each}
 
+	<!--data to be sent -->
+	{#if sentMessages.length > 0}
+		<!-- Corrected: Check if sentMessages array is not empty -->
+		{#each sentMessages as data (data.id)}
+			<!-- card container -->
+			<ForumCard {data} handleUpVote={() => {}} handleDownVote={() => {}} />
+		{/each}
+	{/if}
 	<!--space-->
 	<div class="h-40 w-full"></div>
 
@@ -91,6 +78,8 @@
 			<!-- Input -->
 			<div class="relative">
 				<textarea
+					bind:value={messageText}
+					on:input={handleInput}
 					class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
 					placeholder="write a message ..."
 				></textarea>
@@ -179,6 +168,7 @@
 							<!-- Send Button -->
 							<button
 								type="button"
+								on:click={handlePostAnswer}
 								class="inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-lg text-white bg-blue-600 hover:bg-blue-500 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 							>
 								<svg
