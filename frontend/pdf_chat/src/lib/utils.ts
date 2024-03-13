@@ -20,3 +20,18 @@ export const scrollToBottom = () => {
 		});
 	}, 0);
 };
+
+export const formatDateString = (dateString: string) => {
+	const dateObject = new Date(dateString);
+
+	const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+	const day = String(dateObject.getDate()).padStart(2, '0');
+	const year = dateObject.getFullYear();
+	const hours = String(dateObject.getHours()).padStart(2, '0');
+	const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+	// const seconds = String(dateObject.getSeconds()).padStart(2, '0');
+
+	const formattedDate = `${hours}:${minutes} ${month}/${day}/${year}`;
+
+	return formattedDate;
+};

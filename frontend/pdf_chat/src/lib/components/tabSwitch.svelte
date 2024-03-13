@@ -12,6 +12,7 @@
     if (browser) {
         grade = getCookieValue("grade")
         subject = getCookieValue("subject")
+		console.log(grade)
     }
 
 

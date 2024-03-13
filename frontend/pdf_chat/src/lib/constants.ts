@@ -4,5 +4,6 @@ export const CONSTANTS = {
 		LOGIN: BASE_API + 'auth/token/login/',
 		REGISTER: BASE_API + 'auth/users/',
 		CHAT: BASE_API + 'chat/',
+		FORUM: BASE_API + 'forum/',
 	}
 };

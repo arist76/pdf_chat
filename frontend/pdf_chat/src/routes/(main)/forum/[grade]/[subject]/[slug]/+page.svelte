@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
+	import Forum from "$lib/components/Forum/Forum.svelte";
     import TabSwitch from "$lib/components/tabSwitch.svelte";
-	import ForumsList from "$lib/components/Forum/ForumsList.svelte";
+	export let data;
 </script>
 
 <div class="flex">
@@ -10,8 +11,8 @@
         <div class="mb-5 flex items-center justify-center w-full sm:w-1/3">
             <TabSwitch currentTab='forum'/>
         </div>
-        <div class="w-full lg:w-[80%]">
-            <ForumsList/>
+        <div class="w-full">
+            <Forum forumData={data.forum}/>
         </div>
     </div>
 </div>
