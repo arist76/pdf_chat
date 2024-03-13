@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+import django_filters.rest_framework as filters
 from chat.models import Chat, ChatMessage, PDF
 from chat.serializers import ChatMessageSerializer, ChatSerializer
 from pdf_chat import settings

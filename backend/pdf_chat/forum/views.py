@@ -1,14 +1,14 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
-from forum.serializers import RoomSerializer, ChatMessageSerializer
+from forum.serializers import RoomSerializer, RoomChatMessageSerializer
 from forum.models import Room, ChatMessage
 from rest_framework.response import Response
 
 class RoomListView(ListCreateAPIView):
     serializer_class = RoomSerializer
     permission_classes = [IsAuthenticated]
-    filterset_fields = ["title_slug", "owner", "subject", "grade", "views",]
+    filterset_fields = ["title_slug", "owner", "subject", "grade"]
     
     def get_queryset(self):
         return Room.objects.all() 
@@ -19,7 +19,7 @@ class RoomListView(ListCreateAPIView):
         room = Room.objects.create(**room_s.data, owner=self.request.user)
     
 class RoomMessageView(ListCreateAPIView):
-    serializer_class = ChatMessageSerializer
+    serializer_class = RoomChatMessageSerializer
     permission_classes = [IsAuthenticated]
     filterset_fields = ["room__title_slug"]
     
@@ -27,7 +27,7 @@ class RoomMessageView(ListCreateAPIView):
         return ChatMessage.objects.filter(room__title_slug=self.kwargs.get("title_slug"))
     
     def perform_create(self, serializer):
-        chat_message_s = ChatMessageSerializer(data=self.request.data)
+        chat_message_s = RoomChatMessageSerializer(data=self.request.data)
         chat_message_s.is_valid(raise_exception=True)
         
         title_slug = self.kwargs.get("title_slug")
