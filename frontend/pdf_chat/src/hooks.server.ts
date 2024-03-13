@@ -31,7 +31,8 @@ export const handle = async ({ event, resolve }) => {
 		if (url.pathname == '/signup' || url.pathname == '/signin') {
 			throw redirect(302, '/');
 		}
-		token.set(tokenVal)
+		token.set(tokenVal);
+		
 	}
 
 	const response = await resolve(event);
