@@ -5,6 +5,7 @@
   import SelectInput from "$lib/inputs/+selectInput.svelte";
   import ThemeToggle from "$lib/components/themeToggle.svelte";
 	import { register,login,validatePassword } from '$lib/components/auth/auth';
+  import { getCookieValue } from '$lib/utils';
 
   let formData = {
     firstName: '',
@@ -40,7 +41,11 @@
         const isLogin = await login(formData.username,formData.password)
         if(isLogin) {
           toast.push('registerd successfully.')
-          goto('/')
+
+          let grade = getCookieValue("grade") || "9"
+          let subject = getCookieValue("subject") || "biology"
+
+          goto(`/chat/${grade}/${subject}`);
         }
         else {
           toast.push('registerd successfully. please login')
