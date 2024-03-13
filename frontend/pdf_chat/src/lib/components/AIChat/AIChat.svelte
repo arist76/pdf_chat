@@ -153,10 +153,6 @@
 						</div>
 					</div>
 				</li>
-
-				<script>
-					scrollToBottom();
-				</script>
 				<!-- End AI Chat Bubble -->
 			{/if}
 		</ul>
