@@ -11,3 +11,11 @@ export const getCookieValue = (cookieName: string) => {
 	}
 	return null; // Return null if the cookie with the given name is not found
 };
+
+export const scrollToBottom = () => {
+	const windowHeight = window.innerHeight;
+	window.scrollTo({
+		top: document.body.scrollHeight + windowHeight,
+		behavior: 'smooth'
+	});
+};
