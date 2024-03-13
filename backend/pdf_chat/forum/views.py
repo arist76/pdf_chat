@@ -1,5 +1,6 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from forum.serializers import RoomSerializer, ChatMessageSerializer
 from forum.models import Room, ChatMessage
 from rest_framework.response import Response
@@ -33,3 +34,13 @@ class RoomMessageView(ListCreateAPIView):
         room = Room.objects.get(title_slug=title_slug)
 
         chat_message = ChatMessage.objects.create(**chat_message_s.data, user = self.request.user, room = room)
+
+@api_view(["POST"])
+def room_message_upvote(request):
+    chat_message = ChatMessage.objects.get(request.kwargs.get("title_slug"))
+    chat_message.upvote()
+
+@api_view(["POST"])
+def room_message_downvote(request):
+    chat_message = ChatMessage.objects.get(request.kwargs.get("title_slug"))
+    chat_message.downvote() 

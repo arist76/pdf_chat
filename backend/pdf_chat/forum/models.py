@@ -11,9 +11,6 @@ class Room(models.Model):
     description = models.TextField()
     subject = models.CharField(max_length=150, choices=settings.DEFAULT_SUBJECTS)
     grade = models.CharField(max_length=2, choices=settings.GRADES)
-    views = models.IntegerField(default=0)
-    upvotes = models.IntegerField(default=0)
-    downvotes = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if not self.title_slug:
@@ -30,6 +27,14 @@ class ChatMessage(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+
+    def upvote(self):
+        self.upvote += 1
+        self.save()
+
+    def downvote(self):
+        self.upvote += 1
+        self.save()
 
     def __str__(self):
         return f"Message {self.id}, Room {self.room.id}"

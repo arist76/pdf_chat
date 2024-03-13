@@ -7,10 +7,10 @@
     let password = '';
 
     const handleSubmit = async () => {
-      let grade = getCookieValue("grade")
-      let subject = getCookieValue("subject")
+      let grade = getCookieValue("grade") || "9"
+      let subject = getCookieValue("subject") || "biology"
 
-      const response = await login(username,password)
+      const response = await login(username, password)
       if (response) {
         toast.push('Login successful')
         goto(`/chat/${grade}/${subject}`);

@@ -45,7 +45,7 @@
 	<!--Buttons-->
   <div class="fixed bottom-0 w-full h-auto p-4 flex items-center justify-center font-semibold text-blue-900 text-sm"> 
 		<button on:click={handleLogout} class="bg-white px-6 py-1 border rounded-sm"> Logout </button>
-</div>
+  </div>
 </div>
 
 <!-- End Sidebar -->
