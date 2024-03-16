@@ -3,7 +3,7 @@
 	import SidebarButton from './sidebarUtils/sidebarButton.svelte';
 
 	let accordionVisibility: { [grade: string]: boolean } = {};
-	const subjects = ['Math', 'English', 'Amharic', 'Physics'];
+	const subjects = ['Math', 'English','Physics', 'Biology'];
 	const handleLogout = () => {
 		const isLogedOut = logOut();
 		if (isLogedOut) {

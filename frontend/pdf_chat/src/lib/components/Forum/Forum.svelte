@@ -53,7 +53,19 @@
 	});
 </script>
 
-<section class="w-full h-atuo mt-14 flex flex-col justify-center items-center gap-6 min-w-full">
+<section class="w-full h-atuo flex flex-col justify-center items-center gap-6 min-w-full">
+  <div class="w-full mb-14">
+    <a class="bg-red mt-10 ml-10 " href="http://{$page.url.host}/forum/{$page.params.grade}/{$page.params.subject}/">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"/><path d="M13.293 7.293 8.586 12l4.707 4.707 1.414-1.414L11.414 12l3.293-3.293-1.414-1.414z"/></svg>
+	</a>
+	<h1 class="text-4xl font-bold ml-36 mt-10">
+		{#if forumData}
+			{forumData[0].room.title}
+		{/if}
+	</h1>
+  </div>
+  
+
 	{#each forumData as data (data.id)}
 		<!-- card container -->
 		<ForumCard {data} handleUpVote={() => handleUpVote()} handleDownVote={() => handleDownVote()} />

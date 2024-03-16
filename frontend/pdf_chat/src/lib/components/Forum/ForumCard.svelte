@@ -19,7 +19,7 @@
 			/>
 		</div>
 		<div class="ml-4">
-			<h1 class="font-bold text-xs my-1 sm:text-lg">{data.user}</h1>
+			<h1 class="font-bold text-xs my-1 sm:text-lg">{data.user.username}</h1>
 			<p class="text-xs">{formatDateString(data.date)}</p>
 		</div>
 	</div>
