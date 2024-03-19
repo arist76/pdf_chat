@@ -1,0 +1,10 @@
+services:
+  pdf_chat_backend:
+    build: ./backend
+    command: python ./pdf_chat/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/backend/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/.env
