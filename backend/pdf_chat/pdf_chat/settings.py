@@ -26,16 +26,14 @@ dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nzmrfteez6x+1=-r+629m3mc_!%3p4#7@6dwo28!on0%vjc1bd'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY") 
+'django-insecure-nzmrfteez6x+1=-r+629m3mc_!%3p4#7@6dwo28!on0%vjc1bd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG")
+ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173","http://localhost:5173"]
-
-
-# Application definition
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173","http://localhost:5173"] # Application definition 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,13 +89,25 @@ WSGI_APPLICATION = 'pdf_chat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+sqlite_config = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+postgres_config = {
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
+    }
+}
+
+DATABASES = postgres_config
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -179,3 +189,6 @@ MESSAGE_CONTEXT_COUNT = 20
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"

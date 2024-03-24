@@ -1,10 +1,34 @@
+volumes:
+  static_volume:
+  postgres_data:
 services:
-  pdf_chat_backend:
+  backend:
     build: ./backend
-    command: python ./pdf_chat/manage.py runserver 0.0.0.0:8000
+    command: /bin/bash -c "source entrypoint.sh"
     volumes:
       - ./backend:/backend/
+      - static_volume:/backend/pdf_chat/staticfiles
     ports:
-      - 8000:8000
+      - "8000:8000"
+    expose:
+      - 8000
     env_file:
-      - ./backend/.env
+      - ./backend/pdf_chat/.env
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=django
+      - POSTGRES_PASSWORD=django
+      - POSTGRES_DB=django
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - backend
+    volumes:
+      - static_volume:/backend/pdf_chat/staticfiles
