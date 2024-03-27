@@ -12,6 +12,8 @@ services:
       - "8000:8000"
     expose:
       - 8000
+    environment:
+      - CORS_ALLOWED_ORIGINS=http://frontend:1337,http://nginx:80,http://localhost
     env_file:
       - ./backend/pdf_chat/.env
     depends_on:
@@ -28,7 +30,21 @@ services:
     build: ./nginx
     ports:
       - 1337:80
+    expose:
+      - 80
     depends_on:
       - backend
     volumes:
       - static_volume:/backend/pdf_chat/staticfiles
+
+  frontend:
+    build: ./frontend
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - API_HOST=backend
+      - API_PORT=8000
+    ports:
+      - 80:3000
+    depends_on:
+      - nginx

@@ -30,10 +30,10 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 'django-insecure-nzmrfteez6x+1=-r+629m3mc_!%3p4#7@6dwo28!on0%vjc1bd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG")
+DEBUG = os.environ.get("DJANGO_DEBUG", True)
 ALLOWED_HOSTS = ["*"]
-
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173","http://localhost:5173"] # Application definition 
+print(os.environ.get("CORS_ALLOWED_ORIGINS").split(','))
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173","http://localhost:5173"] + os.environ.get("CORS_ALLOWED_ORIGINS").split(',') 
 
 INSTALLED_APPS = [
     'django.contrib.admin',

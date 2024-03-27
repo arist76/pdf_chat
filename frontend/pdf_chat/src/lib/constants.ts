@@ -1,4 +1,6 @@
-const BASE_API = 'http://127.0.0.1:8000/';
+const API_HOST = process.env.API_HOST
+const API_PORT = process.env.API_PORT
+const BASE_API = `http://${API_HOST}:${API_PORT}/`;
 export const CONSTANTS = {
 	URL: {
 		LOGIN: BASE_API + 'auth/token/login/',
